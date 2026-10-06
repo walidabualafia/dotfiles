@@ -209,8 +209,16 @@ copy() {
 
 Optionally suggest `export EDITOR=nvim`.
 
-**Verify** in a clean login shell:
-`env -i HOME=$HOME TERM=xterm bash -ic 'type -P nvim tmux; tmux -V'`.
+**Verify** in a fresh interactive shell, run from a directory other than `~`:
+`(cd /tmp && bash -ic 'type -P nvim tmux; tmux -V')`.
+
+**Do NOT use `env -i … bash -ic`** (or run any login/interactive shell with
+`$USER` unset, or from `~`). On the HPC cluster `/etc/profile.d/skel.sh` then
+thinks `~/.bashrc` and `~/.bash_profile` are missing and runs
+`cp /etc/skel/.bashrc ./` — overwriting both with the stock skeletons in the
+current directory. This destroyed the user's files once. Also back up
+`~/.bash_profile` (not just `~/.bashrc`) before testing, and re-check
+`wc -l ~/.bashrc` after verifying.
 
 ## 6. macOS (local machine) differences
 
