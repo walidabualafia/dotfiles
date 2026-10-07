@@ -25,4 +25,14 @@ return {
   		},
   	},
   },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" }, -- or load on markdown filetype
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons", -- or mini.icons
+    },
+    opts = {},
+  },
 }
